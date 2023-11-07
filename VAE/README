@@ -1,0 +1,49 @@
+# Training Examples
+
+This folder contains helper functions and examples for training VAE and classifier models on medical images.
+
+## Quickstart 
+
+Open the Lockout-Training Example.ipynb notebook to see examples on how to create a dataset, and train several different models using the functions in this folder.
+
+
+## Folder Structure
+
+- `helpers/` - Contains utility functions for data preparation, model architectures, training loops, inference, etc.
+    - `classifiers.py` - Classifier model architectures
+    - `clustering.py` - Clustering utilities 
+    - `datapreparation.py` - Data loading and preprocessing
+    - `inference.py` - Inference loops
+    - `train.py` - Training loops
+    - `utils.py` - Additional utility functions
+- `lockout-training-example.ipynb` - Jupyter notebook with end-to-end example of training a VAE and classifier 
+
+## Usage
+
+The main steps for training a model are:
+
+1. Prepare dataset
+    - Create a SP-dataset in mnt/ . You can use the `create_dataset` function (Utils folder) or any custom function that creates a dataset in /mnt with SP format 
+    - Load images and metadata  (load train.pkl/ val.pkl as dataframes)
+    - Create `CustomImageDataset` objects using the dataframes 
+2. Define model architecture
+    - Use `VariationalAutoencoder` for VAE
+    - Use `ClassifierModel` for vanilla classifier 
+    - Use `convnext_pretrained` for convnext
+    - See `Classifiers` for other options 
+3. Train model
+    - For VAE, use `train_loop_vae`
+    - For classifier, use `train_loop_cls`
+    - Pass appropriate model, optimizer, loss function, data loaders
+4. Generate embeddings
+    - For VAE, use `inference_loop` to generate latent vectors
+    - For classifier, use `inference_loop`
+5. Analyze embeddings
+    - Clustering, dimensionality reduction, etc.
+    - Visualizations in `clustering.py`
+
+See the notebook for full examples of training a VAE, training a classifier on VAE embeddings, and analyzing the classifier embeddings.
+
+The `helpers` modules provide all the key building blocks needed to define models, train them on custom datasets, generate embeddings, and analyze the results. The notebook shows how to tie these together into an end-to-end workflow.
+
+Let me know if any part of the structure or documentation needs more explanation!
